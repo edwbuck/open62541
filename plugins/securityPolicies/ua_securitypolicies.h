@@ -9,7 +9,7 @@
 #ifndef UA_SECURITYPOLICIES_H_
 #define UA_SECURITYPOLICIES_H_
 
-#include "ua_plugin_securitypolicy.h"
+#include <open62541/plugin/securitypolicy.h>
 
 _UA_BEGIN_DECLS
 

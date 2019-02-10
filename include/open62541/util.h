@@ -5,20 +5,18 @@
  *    Copyright 2018 (c) Stefan Profanter, fortiss GmbH
  */
 
-
 #ifndef UA_HELPER_H_
 #define UA_HELPER_H_
 
-#include "ua_config.h"
-#include "ua_types.h"
+#include <open62541/types.h>
 
 _UA_BEGIN_DECLS
 
 /**
-* Endpoint URL Parser
-* -------------------
-* The endpoint URL parser is generally useful for the implementation of network
-* layer plugins. */
+ * Endpoint URL Parser
+ * -------------------
+ * The endpoint URL parser is generally useful for the implementation of network
+ * layer plugins. */
 
 /* Split the given endpoint url into hostname, port and path. All arguments must
  * be non-NULL. EndpointUrls have the form "opc.tcp://hostname:port/path", port

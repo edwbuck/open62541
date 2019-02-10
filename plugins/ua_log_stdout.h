@@ -7,7 +7,7 @@
 #ifndef UA_LOG_STDOUT_H_
 #define UA_LOG_STDOUT_H_
 
-#include "ua_plugin_log.h"
+#include <open62541/plugin/log.h>
 
 _UA_BEGIN_DECLS
 

@@ -6,9 +6,9 @@
  * Copyright 2018 (c) Jose Cabral, fortiss GmbH
  */
 
-#include "ua_plugin_network.h"
+#include <open62541/plugin/network.h>
+#include <open62541/util.h>
 #include "ua_network_pubsub_udp.h"
-#include "ua_util.h"
 #include "ua_log_stdout.h"
 
 //UDP multicast network layer specific internal data

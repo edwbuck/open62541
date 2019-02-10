@@ -8,7 +8,7 @@
 #ifndef UA_SERVER_PUBSUB_H
 #define UA_SERVER_PUBSUB_H
 
-#include "ua_server.h"
+#include <open62541/server.h>
 
 _UA_BEGIN_DECLS
 

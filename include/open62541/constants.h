@@ -11,7 +11,7 @@
 #ifndef UA_CONSTANTS_H_
 #define UA_CONSTANTS_H_
 
-#include "ua_config.h"
+#include <open62541/config.h>
 
 _UA_BEGIN_DECLS
 

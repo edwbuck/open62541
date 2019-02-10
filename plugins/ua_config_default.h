@@ -9,9 +9,9 @@
 #ifndef UA_CONFIG_DEFAULT_H_
 #define UA_CONFIG_DEFAULT_H_
 
-#include "ua_server.h"
-#include "ua_server_config.h"
-#include "ua_client.h"
+#include <open62541/server.h>
+#include <open62541/server_config.h>
+#include <open62541/client.h>
 
 _UA_BEGIN_DECLS
 

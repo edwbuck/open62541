@@ -7,7 +7,7 @@
 #ifndef UA_PKI_CERTIFICATE_H_
 #define UA_PKI_CERTIFICATE_H_
 
-#include "ua_plugin_pki.h"
+#include <open62541/plugin/pki.h>
 
 _UA_BEGIN_DECLS
 

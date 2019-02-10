@@ -9,9 +9,10 @@
 #ifndef UA_CLIENT_CONFIG_H
 #define UA_CLIENT_CONFIG_H
 
-#include "ua_config.h"
-#include "ua_plugin_securitypolicy.h"
-#include "ua_plugin_network.h"
+#include <open62541/config.h>
+#include <open62541/plugin/log.h>
+#include <open62541/plugin/network.h>
+#include <open62541/plugin/securitypolicy.h>
 
 _UA_BEGIN_DECLS
 

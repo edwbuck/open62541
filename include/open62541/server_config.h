@@ -11,20 +11,20 @@
 #ifndef UA_SERVER_CONFIG_H_
 #define UA_SERVER_CONFIG_H_
 
-#include "ua_server.h"
-#include "ua_plugin_log.h"
-#include "ua_plugin_network.h"
-#include "ua_plugin_access_control.h"
-#include "ua_plugin_pki.h"
-#include "ua_plugin_securitypolicy.h"
-#include "ua_plugin_nodestore.h"
+#include <open62541/server.h>
+#include <open62541/plugin/log.h>
+#include <open62541/plugin/pki.h>
+#include <open62541/plugin/network.h>
+#include <open62541/plugin/nodestore.h>
+#include <open62541/plugin/accesscontrol.h>
+#include <open62541/plugin/securitypolicy.h>
 
 #ifdef UA_ENABLE_PUBSUB
-#include "ua_plugin_pubsub.h"
+#include <open62541/plugin/pubsub.h>
 #endif
 
 #ifdef UA_ENABLE_HISTORIZING
-#include "ua_plugin_historydatabase.h"
+#include <open62541/plugin/historydatabase.h>
 #endif
 
 _UA_BEGIN_DECLS

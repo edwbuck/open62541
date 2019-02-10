@@ -9,8 +9,8 @@
 #ifndef UA_PLUGIN_NETWORK_H_
 #define UA_PLUGIN_NETWORK_H_
 
-#include "ua_server.h"
-#include "ua_plugin_log.h"
+#include <open62541/server.h>
+#include <open62541/plugin/log.h>
 
 _UA_BEGIN_DECLS
 

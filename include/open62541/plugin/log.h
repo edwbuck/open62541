@@ -10,7 +10,7 @@
 #define UA_PLUGIN_LOG_H_
 
 #include <stdarg.h>
-#include "ua_config.h"
+#include <open62541/config.h>
 
 _UA_BEGIN_DECLS
 

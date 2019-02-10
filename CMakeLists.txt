@@ -470,8 +470,8 @@ endif()
 #########################
 
 file(MAKE_DIRECTORY "${PROJECT_BINARY_DIR}/src_generated")
-configure_file("include/ua_config.h.in" "${PROJECT_BINARY_DIR}/src_generated/ua_config.h")
-configure_file("include/open62541.pc.in" "${PROJECT_BINARY_DIR}/src_generated/open62541.pc" @ONLY)
+configure_file(include/open62541/config.h.in ${PROJECT_BINARY_DIR}/src_generated/open62541/config.h)
+configure_file(open62541.pc.in ${PROJECT_BINARY_DIR}/src_generated/open62541.pc @ONLY)
 
 if(UA_ENABLE_DISCOVERY_MULTICAST)
     set(MDNSD_LOGLEVEL 300 CACHE STRING "Level at which logs shall be reported" FORCE)
@@ -488,12 +488,11 @@ include_directories(${PROJECT_SOURCE_DIR}/include
                     ${PROJECT_SOURCE_DIR}/plugins/securityPolicies
                     ${PROJECT_SOURCE_DIR}/deps
                     ${PROJECT_SOURCE_DIR}/src/pubsub
-                    ${PROJECT_BINARY_DIR}
                     ${PROJECT_BINARY_DIR}/src_generated
                     ${MBEDTLS_INCLUDE_DIRS})
 
 set(exported_headers ${exported_headers}
-                     ${PROJECT_BINARY_DIR}/src_generated/ua_config.h
+                     ${PROJECT_BINARY_DIR}/src_generated/open62541/config.h
                      ${PROJECT_SOURCE_DIR}/arch/ua_architecture_base.h
                      ${ua_architecture_headers_beginning}
                      )
@@ -509,29 +508,29 @@ endif()
 set(exported_headers ${exported_headers}
                      ${PROJECT_SOURCE_DIR}/deps/ms_stdint.h
                      ${PROJECT_SOURCE_DIR}/arch/ua_architecture_definitions.h
-                     ${PROJECT_BINARY_DIR}/src_generated/ua_statuscodes.h
-                     ${PROJECT_BINARY_DIR}/src_generated/ua_nodeids.h
-                     ${PROJECT_SOURCE_DIR}/include/ua_constants.h
-                     ${PROJECT_SOURCE_DIR}/include/ua_types.h
-                     ${PROJECT_BINARY_DIR}/src_generated/ua_types_generated.h
-                     ${PROJECT_BINARY_DIR}/src_generated/ua_types_generated_handling.h
-                     ${PROJECT_SOURCE_DIR}/include/ua_util.h
-                     ${PROJECT_SOURCE_DIR}/include/ua_server.h
+                     ${PROJECT_BINARY_DIR}/src_generated/open62541/statuscodes.h
+                     ${PROJECT_BINARY_DIR}/src_generated/open62541/nodeids.h
+                     ${PROJECT_SOURCE_DIR}/include/open62541/constants.h
+                     ${PROJECT_SOURCE_DIR}/include/open62541/types.h
+                     ${PROJECT_BINARY_DIR}/src_generated/open62541/types_generated.h
+                     ${PROJECT_BINARY_DIR}/src_generated/open62541/types_generated_handling.h
+                     ${PROJECT_SOURCE_DIR}/include/open62541/util.h
+                     ${PROJECT_SOURCE_DIR}/include/open62541/server.h
                      ${historizing_exported_headers}
-                     ${PROJECT_SOURCE_DIR}/include/ua_plugin_log.h
-                     ${PROJECT_SOURCE_DIR}/include/ua_plugin_network.h
-                     ${PROJECT_SOURCE_DIR}/include/ua_plugin_access_control.h
-                     ${PROJECT_SOURCE_DIR}/include/ua_plugin_pki.h
-                     ${PROJECT_SOURCE_DIR}/include/ua_plugin_securitypolicy.h
-                     ${PROJECT_SOURCE_DIR}/include/ua_server_pubsub.h
-                     ${PROJECT_SOURCE_DIR}/include/ua_plugin_pubsub.h
-                     ${PROJECT_SOURCE_DIR}/include/ua_plugin_nodestore.h
-                     ${PROJECT_SOURCE_DIR}/include/ua_server_config.h
-                     ${PROJECT_SOURCE_DIR}/include/ua_client_config.h
-                     ${PROJECT_SOURCE_DIR}/include/ua_client.h
-                     ${PROJECT_SOURCE_DIR}/include/ua_client_highlevel.h
-                     ${PROJECT_SOURCE_DIR}/include/ua_client_subscriptions.h
-                     ${PROJECT_SOURCE_DIR}/include/ua_client_highlevel_async.h)
+                     ${PROJECT_SOURCE_DIR}/include/open62541/plugin/log.h
+                     ${PROJECT_SOURCE_DIR}/include/open62541/plugin/network.h
+                     ${PROJECT_SOURCE_DIR}/include/open62541/plugin/accesscontrol.h
+                     ${PROJECT_SOURCE_DIR}/include/open62541/plugin/pki.h
+                     ${PROJECT_SOURCE_DIR}/include/open62541/plugin/securitypolicy.h
+                     ${PROJECT_SOURCE_DIR}/include/open62541/server_pubsub.h
+                     ${PROJECT_SOURCE_DIR}/include/open62541/plugin/pubsub.h
+                     ${PROJECT_SOURCE_DIR}/include/open62541/plugin/nodestore.h
+                     ${PROJECT_SOURCE_DIR}/include/open62541/server_config.h
+                     ${PROJECT_SOURCE_DIR}/include/open62541/client_config.h
+                     ${PROJECT_SOURCE_DIR}/include/open62541/client.h
+                     ${PROJECT_SOURCE_DIR}/include/open62541/client_highlevel.h
+                     ${PROJECT_SOURCE_DIR}/include/open62541/client_subscriptions.h
+                     ${PROJECT_SOURCE_DIR}/include/open62541/client_highlevel_async.h)
 
 set(internal_headers ${PROJECT_SOURCE_DIR}/deps/open62541_queue.h
                      ${PROJECT_SOURCE_DIR}/deps/ziptree.h
@@ -540,10 +539,10 @@ set(internal_headers ${PROJECT_SOURCE_DIR}/deps/open62541_queue.h
                      ${PROJECT_SOURCE_DIR}/deps/base64.h
                      ${PROJECT_SOURCE_DIR}/src/ua_util_internal.h
                      ${PROJECT_SOURCE_DIR}/src/ua_types_encoding_binary.h
-                     ${PROJECT_BINARY_DIR}/src_generated/ua_types_generated_encoding_binary.h
-                     ${PROJECT_BINARY_DIR}/src_generated/ua_transport_generated.h
-                     ${PROJECT_BINARY_DIR}/src_generated/ua_transport_generated_handling.h
-                     ${PROJECT_BINARY_DIR}/src_generated/ua_transport_generated_encoding_binary.h
+                     ${PROJECT_BINARY_DIR}/src_generated/open62541/types_generated_encoding_binary.h
+                     ${PROJECT_BINARY_DIR}/src_generated/open62541/transport_generated.h
+                     ${PROJECT_BINARY_DIR}/src_generated/open62541/transport_generated_handling.h
+                     ${PROJECT_BINARY_DIR}/src_generated/open62541/transport_generated_encoding_binary.h
                      ${PROJECT_SOURCE_DIR}/src/ua_connection_internal.h
                      ${PROJECT_SOURCE_DIR}/src/ua_securechannel.h
                      ${PROJECT_SOURCE_DIR}/src/ua_workqueue.h
@@ -563,9 +562,9 @@ set(internal_headers ${PROJECT_SOURCE_DIR}/deps/open62541_queue.h
 # TODO: make client optional
 set(lib_sources ${PROJECT_SOURCE_DIR}/src/ua_types.c
                 ${PROJECT_SOURCE_DIR}/src/ua_types_encoding_binary.c
-                ${PROJECT_BINARY_DIR}/src_generated/ua_types_generated.c
-                ${PROJECT_BINARY_DIR}/src_generated/ua_transport_generated.c
-                ${PROJECT_BINARY_DIR}/src_generated/ua_statuscodes.c
+                ${PROJECT_BINARY_DIR}/src_generated/open62541/types_generated.c
+                ${PROJECT_BINARY_DIR}/src_generated/open62541/transport_generated.c
+                ${PROJECT_BINARY_DIR}/src_generated/open62541/statuscodes.c
                 ${PROJECT_SOURCE_DIR}/src/ua_util.c
                 ${PROJECT_SOURCE_DIR}/src/ua_workqueue.c
                 ${PROJECT_SOURCE_DIR}/src/ua_timer.c
@@ -766,7 +765,7 @@ endif()
 # standard-defined data types
 ua_generate_datatypes(
     BUILTIN
-    NAME "ua_types"
+    NAME "types"
     TARGET_SUFFIX "types"
     NAMESPACE_IDX 0
     FILE_CSV "${UA_FILE_NODEIDS}"
@@ -776,7 +775,7 @@ ua_generate_datatypes(
 
 # transport data types
 ua_generate_datatypes(
-    NAME "ua_transport"
+    NAME "transport"
     TARGET_SUFFIX "transport"
     NAMESPACE_IDX 1
     FILE_CSV "${UA_FILE_NODEIDS}"
@@ -785,17 +784,17 @@ ua_generate_datatypes(
 )
 
 # statuscode explanation
-add_custom_command(OUTPUT ${PROJECT_BINARY_DIR}/src_generated/ua_statuscodes.h
-                          ${PROJECT_BINARY_DIR}/src_generated/ua_statuscodes.c
+add_custom_command(OUTPUT ${PROJECT_BINARY_DIR}/src_generated/open62541/statuscodes.h
+                          ${PROJECT_BINARY_DIR}/src_generated/open62541/statuscodes.c
         PRE_BUILD
         COMMAND ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/tools/generate_statuscode_descriptions.py
-        ${UA_FILE_STATUSCODES} ${PROJECT_BINARY_DIR}/src_generated/ua_statuscodes
+        ${UA_FILE_STATUSCODES} ${PROJECT_BINARY_DIR}/src_generated/open62541/statuscodes
         DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/generate_statuscode_descriptions.py
                 ${UA_FILE_STATUSCODES})
 
 # Header containing defines for all NodeIds
 ua_generate_nodeid_header(
-    NAME "ua_nodeids"
+    NAME "nodeids"
     ID_PREFIX "NS0"
     TARGET_SUFFIX "ids-ns0"
     FILE_CSV "${UA_FILE_NODEIDS}"
@@ -804,9 +803,9 @@ ua_generate_nodeid_header(
 # we need a custom target to avoid that the generator is called concurrently and
 # thus overwriting files while the other thread is compiling
 add_custom_target(open62541-generator-statuscode DEPENDS
-        ${PROJECT_BINARY_DIR}/src_generated/ua_nodeids.h
-        ${PROJECT_BINARY_DIR}/src_generated/ua_statuscodes.h
-        ${PROJECT_BINARY_DIR}/src_generated/ua_statuscodes.c)
+        ${PROJECT_BINARY_DIR}/src_generated/open62541/nodeids.h
+        ${PROJECT_BINARY_DIR}/src_generated/open62541/statuscodes.h
+        ${PROJECT_BINARY_DIR}/src_generated/open62541/statuscodes.c)
 
 if (UA_ENABLE_AMALGAMATION)
     # single-file release
@@ -1016,7 +1015,6 @@ add_custom_target(cpplint cpplint
                           ${default_plugin_sources}
                           ${ua_architecture_headers}
                           ${ua_architecture_sources}
-
                   COMMENT "Run cpplint code style checker on the library")
 
 ##########################

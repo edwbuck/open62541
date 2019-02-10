@@ -17,10 +17,7 @@
 #include <mbedtls/version.h>
 #include <mbedtls/sha1.h>
 
-#include "ua_types.h"
-#include "ua_plugin_pki.h"
 #include "ua_securitypolicies.h"
-#include "ua_types_generated_handling.h"
 
 /* Notes:
  * mbedTLS' AES allows in-place encryption and decryption. Sow we don't have to

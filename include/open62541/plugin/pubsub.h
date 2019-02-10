@@ -8,7 +8,7 @@
 #ifndef UA_PLUGIN_PUBSUB_H_
 #define UA_PLUGIN_PUBSUB_H_
 
-#include "ua_server_pubsub.h"
+#include <open62541/server_pubsub.h>
 
 _UA_BEGIN_DECLS
 
@@ -20,15 +20,14 @@ _UA_BEGIN_DECLS
  * PubSub Connection Plugin API
  * ============================
  *
- * The PubSub Connection API is the interface between concrete network implementations and the internal pubsub
- * code.
+ * The PubSub Connection API is the interface between concrete network
+ * implementations and the internal pubsub code.
  *
- * The PubSub specification enables the creation of new connections on runtime. Wording:
- * 'Connection' -> OPC UA standard 'highlevel' perspective,
- * 'Channel' -> open62541 implementation 'lowlevel' perspective. A channel can be assigned with different
- * network implementations like UDP, MQTT, AMQP. The channel provides basis services
- * like send, regist, unregist, receive, close.
- */
+ * The PubSub specification enables the creation of new connections on runtime.
+ * Wording: 'Connection' -> OPC UA standard 'highlevel' perspective, 'Channel'
+ * -> open62541 implementation 'lowlevel' perspective. A channel can be assigned
+ * with different network implementations like UDP, MQTT, AMQP. The channel
+ * provides basis services like send, regist, unregist, receive, close. */
 
 typedef enum {
     UA_PUBSUB_CHANNEL_RDY,
@@ -72,13 +71,14 @@ struct UA_PubSubChannel {
 };
 
 /**
- * The UA_PubSubTransportLayer is used for the creation of new connections. Whenever on runtime a new
- * connection is request, the internal PubSub implementation call * the 'createPubSubChannel' function.
- * The 'transportProfileUri' contains the standard defined transport profile information
- * and is used to identify the type of connections which can be created by the
- * TransportLayer. The server config contains a list of UA_PubSubTransportLayer.
- * Take a look in the tutorial_pubsub_connection to get informations about the TransportLayer handling.
- */
+ * The UA_PubSubTransportLayer is used for the creation of new connections.
+ * Whenever on runtime a new connection is request, the internal PubSub
+ * implementation call * the 'createPubSubChannel' function. The
+ * 'transportProfileUri' contains the standard defined transport profile
+ * information and is used to identify the type of connections which can be
+ * created by the TransportLayer. The server config contains a list of
+ * UA_PubSubTransportLayer. Take a look in the tutorial_pubsub_connection to get
+ * informations about the TransportLayer handling. */
 
 typedef struct {
     UA_String transportProfileUri;
@@ -86,15 +86,14 @@ typedef struct {
 } UA_PubSubTransportLayer;
 
 /**
- * The UA_ServerConfig_addPubSubTransportLayer is used to add a transport
- * layer to the server configuration. The list memory is allocated and will be freed with
- * UA_PubSubManager_delete.
+ * The UA_ServerConfig_addPubSubTransportLayer is used to add a transport layer
+ * to the server configuration. The list memory is allocated and will be freed
+ * with UA_PubSubManager_delete.
  *
  * .. note:: If the UA_String transportProfileUri was dynamically allocated
  *           the memory has to be freed when no longer required.
  *
- * .. note:: This has to be done before the server is started with UA_Server_run.
- */
+ * .. note:: This has to be done before the server is started with UA_Server_run. */
 UA_StatusCode UA_EXPORT
 UA_ServerConfig_addPubSubTransportLayer(UA_ServerConfig *config,
         UA_PubSubTransportLayer *pubsubTransportLayer);

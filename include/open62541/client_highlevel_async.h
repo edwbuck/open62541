@@ -9,13 +9,14 @@
 #ifndef UA_CLIENT_HIGHLEVEL_ASYNC_H_
 #define UA_CLIENT_HIGHLEVEL_ASYNC_H_
 
-#include "ua_client.h"
+#include <open62541/client.h>
 
 _UA_BEGIN_DECLS
 
 /**
  * Raw Services
  * ^^^^^^^^^^^^ */
+
 typedef void (*UA_ClientAsyncReadCallback)(UA_Client *client, void *userdata,
 		UA_UInt32 requestId, UA_ReadResponse *rr);
 static UA_INLINE UA_StatusCode UA_Client_sendAsyncReadRequest(UA_Client *client,

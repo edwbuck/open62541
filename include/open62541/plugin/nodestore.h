@@ -17,8 +17,7 @@
  * not meant to be used directly by end users. Please use the public server API
  * / OPC UA services to interact with the information model. */
 
-#include "ua_types.h"
-#include "ua_server.h"
+#include <open62541/server.h>
 
 _UA_BEGIN_DECLS
 

@@ -13,10 +13,10 @@
 #ifndef UA_SERVER_H_
 #define UA_SERVER_H_
 
-#include "ua_types.h"
-#include "ua_types_generated.h"
-#include "ua_types_generated_handling.h"
-#include "ua_nodeids.h"
+#include <open62541/types.h>
+#include <open62541/nodeids.h>
+#include <open62541/types_generated.h>
+#include <open62541/types_generated_handling.h>
 
 _UA_BEGIN_DECLS
 

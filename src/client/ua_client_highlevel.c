@@ -11,11 +11,9 @@
  *    Copyright 2018 (c) Peter Rustler, basyskom GmbH
  */
 
-#include "ua_client.h"
 #include "ua_client_internal.h"
-#include "ua_client_highlevel.h"
-#include "ua_client_highlevel_async.h"
-#include "ua_util.h"
+#include <open62541/client_highlevel.h>
+#include <open62541/client_highlevel_async.h>
 
 UA_StatusCode
 UA_Client_NamespaceGetIndex(UA_Client *client, UA_String *namespaceUri,

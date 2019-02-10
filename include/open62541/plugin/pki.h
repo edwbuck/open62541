@@ -8,8 +8,8 @@
 #ifndef UA_PLUGIN_PKI_H_
 #define UA_PLUGIN_PKI_H_
 
-#include "ua_types.h"
-#include "ua_server.h"
+#include <open62541/types.h>
+#include <open62541/types_generated.h>
 
 _UA_BEGIN_DECLS
 

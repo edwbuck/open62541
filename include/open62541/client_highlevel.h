@@ -15,7 +15,7 @@
 #ifndef UA_CLIENT_HIGHLEVEL_H_
 #define UA_CLIENT_HIGHLEVEL_H_
 
-#include "ua_client.h"
+#include <open62541/client.h>
 
 _UA_BEGIN_DECLS
 

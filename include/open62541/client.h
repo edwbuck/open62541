@@ -17,14 +17,11 @@
 #ifndef UA_CLIENT_H_
 #define UA_CLIENT_H_
 
-#include "ua_types.h"
-#include "ua_types_generated.h"
-#include "ua_types_generated_handling.h"
-#include "ua_plugin_securitypolicy.h"
-#include "ua_plugin_network.h"
-#include "ua_plugin_log.h"
-#include "ua_client_config.h"
-#include "ua_nodeids.h"
+#include <open62541/types.h>
+#include <open62541/nodeids.h>
+#include <open62541/client_config.h>
+#include <open62541/types_generated.h>
+#include <open62541/types_generated_handling.h>
 
 _UA_BEGIN_DECLS
 

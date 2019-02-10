@@ -9,7 +9,7 @@
 #ifndef UA_NODESTORE_DEFAULT_H_
 #define UA_NODESTORE_DEFAULT_H_
 
-#include "ua_plugin_nodestore.h"
+#include <open62541/plugin/nodestore.h>
 
 _UA_BEGIN_DECLS
 

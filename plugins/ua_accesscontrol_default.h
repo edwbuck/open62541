@@ -8,8 +8,8 @@
 #ifndef UA_ACCESSCONTROL_DEFAULT_H_
 #define UA_ACCESSCONTROL_DEFAULT_H_
 
-#include "ua_server.h"
-#include "ua_plugin_access_control.h"
+#include <open62541/server.h>
+#include <open62541/plugin/accesscontrol.h>
 
 _UA_BEGIN_DECLS
 
