@@ -10,8 +10,8 @@
 
 #define UA_INTERNAL
 #include <open62541/util.h>
+#include <open62541/plugin/log_stdout.h>
 #include "ua_network_tcp.h"
-#include "ua_log_stdout.h"
 #include "open62541_queue.h"
 
 #include <string.h> // memset

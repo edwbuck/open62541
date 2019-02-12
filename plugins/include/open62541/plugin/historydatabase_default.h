@@ -8,9 +8,7 @@
 #ifndef UA_HISTORYDATASERVICE_DEFAULT_H_
 #define UA_HISTORYDATASERVICE_DEFAULT_H_
 
-#include "ua_server.h"
-#include "ua_plugin_historydatabase.h"
-#include "ua_plugin_history_data_gathering.h"
+#include <open62541/plugin/historydatabase.h>
 
 _UA_BEGIN_DECLS
 

@@ -297,24 +297,6 @@ if(UA_ENABLE_EXPERIMENTAL_HISTORIZING)
     endif()
 endif()
 
-if(UA_ENABLE_HISTORIZING)
-    set(historizing_exported_headers
-        ${PROJECT_SOURCE_DIR}/include/ua_plugin_historydatabase.h
-        ${PROJECT_SOURCE_DIR}/plugins/historydata/ua_plugin_history_data_backend.h
-        ${PROJECT_SOURCE_DIR}/plugins/historydata/ua_plugin_history_data_gathering.h
-        )
-    set(historizing_default_plugin_headers
-        ${PROJECT_SOURCE_DIR}/plugins/historydata/ua_historydatabackend_memory.h
-        ${PROJECT_SOURCE_DIR}/plugins/historydata/ua_historydatagathering_default.h
-        ${PROJECT_SOURCE_DIR}/plugins/historydata/ua_historydatabase_default.h
-        )
-    set(historizing_default_plugin_sources
-        ${PROJECT_SOURCE_DIR}/plugins/historydata/ua_historydatabackend_memory.c
-        ${PROJECT_SOURCE_DIR}/plugins/historydata/ua_historydatagathering_default.c
-        ${PROJECT_SOURCE_DIR}/plugins/historydata/ua_historydatabase_default.c
-        )
-endif()
-
 option(UA_BUILD_FUZZING_CORPUS "Build the fuzzing corpus" OFF)
 mark_as_advanced(UA_BUILD_FUZZING_CORPUS)
 if(UA_BUILD_FUZZING_CORPUS)
@@ -483,9 +465,7 @@ if(UA_ENABLE_DISCOVERY)
 endif()
 
 include_directories(${PROJECT_SOURCE_DIR}/include
-                    ${PROJECT_SOURCE_DIR}/plugins
-                    ${PROJECT_SOURCE_DIR}/plugins/networking
-                    ${PROJECT_SOURCE_DIR}/plugins/securityPolicies
+                    ${PROJECT_SOURCE_DIR}/plugins/include
                     ${PROJECT_SOURCE_DIR}/deps
                     ${PROJECT_SOURCE_DIR}/src/pubsub
                     ${PROJECT_BINARY_DIR}/src_generated
@@ -516,7 +496,7 @@ set(exported_headers ${exported_headers}
                      ${PROJECT_BINARY_DIR}/src_generated/open62541/types_generated_handling.h
                      ${PROJECT_SOURCE_DIR}/include/open62541/util.h
                      ${PROJECT_SOURCE_DIR}/include/open62541/server.h
-                     ${historizing_exported_headers}
+                     ${PROJECT_SOURCE_DIR}/include/open62541/plugin/historydatabase.h
                      ${PROJECT_SOURCE_DIR}/include/open62541/plugin/log.h
                      ${PROJECT_SOURCE_DIR}/include/open62541/plugin/network.h
                      ${PROJECT_SOURCE_DIR}/include/open62541/plugin/accesscontrol.h
@@ -607,22 +587,22 @@ set(lib_sources ${PROJECT_SOURCE_DIR}/src/ua_types.c
                 ${PROJECT_SOURCE_DIR}/deps/pcg_basic.c
                 ${PROJECT_SOURCE_DIR}/deps/base64.c)
 
-set(default_plugin_headers ${PROJECT_SOURCE_DIR}/plugins/ua_accesscontrol_default.h
-                           ${historizing_default_plugin_headers}
-                           ${PROJECT_SOURCE_DIR}/plugins/ua_pki_certificate.h
-                           ${PROJECT_SOURCE_DIR}/plugins/ua_log_stdout.h
-                           ${PROJECT_SOURCE_DIR}/plugins/ua_nodestore_default.h
-                           ${PROJECT_SOURCE_DIR}/plugins/ua_config_default.h
-                           ${PROJECT_SOURCE_DIR}/plugins/securityPolicies/ua_securitypolicies.h
+set(default_plugin_headers ${PROJECT_SOURCE_DIR}/plugins/include/open62541/plugin/accesscontrol_default.h
+                           ${PROJECT_SOURCE_DIR}/plugins/include/open62541/plugin/historydatabase_default.h
+                           ${PROJECT_SOURCE_DIR}/plugins/include/open62541/plugin/pki_default.h
+                           ${PROJECT_SOURCE_DIR}/plugins/include/open62541/plugin/log_stdout.h
+                           ${PROJECT_SOURCE_DIR}/plugins/include/open62541/plugin/nodestore_default.h
+                           ${PROJECT_SOURCE_DIR}/plugins/include/open62541/plugin/server_config_default.h
+                           ${PROJECT_SOURCE_DIR}/plugins/include/open62541/plugin/client_config_default.h
+                           ${PROJECT_SOURCE_DIR}/plugins/include/open62541/plugin/securitypolicy_default.h
 )
 
 set(default_plugin_sources ${PROJECT_SOURCE_DIR}/plugins/ua_log_stdout.c
                            ${PROJECT_SOURCE_DIR}/plugins/ua_accesscontrol_default.c
-                           ${historizing_default_plugin_sources}
-                           ${PROJECT_SOURCE_DIR}/plugins/ua_pki_certificate.c
+                           ${PROJECT_SOURCE_DIR}/plugins/ua_pki_default.c
                            ${PROJECT_SOURCE_DIR}/plugins/ua_nodestore_default.c
                            ${PROJECT_SOURCE_DIR}/plugins/ua_config_default.c
-                           ${PROJECT_SOURCE_DIR}/plugins/securityPolicies/ua_securitypolicy_none.c
+                           ${PROJECT_SOURCE_DIR}/plugins/ua_securitypolicy_none.c
 )
 
 if(UA_GENERATED_NAMESPACE_ZERO)
@@ -632,8 +612,19 @@ endif()
 
 if(UA_ENABLE_ENCRYPTION)
     list(APPEND default_plugin_sources
-         ${PROJECT_SOURCE_DIR}/plugins/securityPolicies/ua_securitypolicy_basic128rsa15.c
-         ${PROJECT_SOURCE_DIR}/plugins/securityPolicies/ua_securitypolicy_basic256sha256.c)
+         ${PROJECT_SOURCE_DIR}/plugins/ua_securitypolicy_basic128rsa15.c
+         ${PROJECT_SOURCE_DIR}/plugins/ua_securitypolicy_basic256sha256.c)
+endif()
+
+if(UA_ENABLE_HISTORIZING)
+    list(APPEND default_plugin_sources
+         ${PROJECT_SOURCE_DIR}/plugins/historydata/ua_historydatabackend_memory.h
+         ${PROJECT_SOURCE_DIR}/plugins/historydata/ua_historydatagathering_default.h
+         ${PROJECT_SOURCE_DIR}/plugins/historydata/ua_plugin_history_data_backend.h
+         ${PROJECT_SOURCE_DIR}/plugins/historydata/ua_plugin_history_data_gathering.h
+         ${PROJECT_SOURCE_DIR}/plugins/historydata/ua_historydatabackend_memory.c
+         ${PROJECT_SOURCE_DIR}/plugins/historydata/ua_historydatagathering_default.c
+         ${PROJECT_SOURCE_DIR}/plugins/historydata/ua_historydatabase_default.c)
 endif()
 
 if(UA_ENABLE_DISCOVERY)
@@ -642,11 +633,11 @@ if(UA_ENABLE_DISCOVERY)
 endif()
 
 if(UA_ENABLE_PUBSUB)
-    list(APPEND default_plugin_headers ${PROJECT_SOURCE_DIR}/plugins/networking/ua_network_pubsub_udp.h)
-    list(APPEND default_plugin_sources ${PROJECT_SOURCE_DIR}/plugins/networking/ua_network_pubsub_udp.c)
+    list(APPEND default_plugin_headers ${PROJECT_SOURCE_DIR}/plugins/ua_pubsub_udp.h)
+    list(APPEND default_plugin_sources ${PROJECT_SOURCE_DIR}/plugins/ua_pubsub_udp.c)
     if(UA_ENABLE_PUBSUB_ETH_UADP)
-        list(APPEND default_plugin_headers ${PROJECT_SOURCE_DIR}/plugins/networking/ua_network_pubsub_ethernet.h)
-        list(APPEND default_plugin_sources ${PROJECT_SOURCE_DIR}/plugins/networking/ua_network_pubsub_ethernet.c)
+        list(APPEND default_plugin_headers ${PROJECT_SOURCE_DIR}/plugins/networking/ua_pubsub_ethernet.h)
+        list(APPEND default_plugin_sources ${PROJECT_SOURCE_DIR}/plugins/networking/ua_pubsub_ethernet.c)
     endif()
 endif()
 
@@ -1146,7 +1137,6 @@ if(NOT UA_ENABLE_AMALGAMATION)
     install(FILES ${internal_headers}
                   ${exported_headers}
                   ${default_plugin_headers}
-                  ${historizing_default_plugin_headers}
                   ${ua_architecture_headers}
             DESTINATION ${open62541_install_include_dir})
 else()

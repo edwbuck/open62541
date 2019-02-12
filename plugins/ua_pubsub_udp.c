@@ -6,10 +6,9 @@
  * Copyright 2018 (c) Jose Cabral, fortiss GmbH
  */
 
-#include <open62541/plugin/network.h>
 #include <open62541/util.h>
-#include "ua_network_pubsub_udp.h"
-#include "ua_log_stdout.h"
+#include <open62541/plugin/pubsub_udp.h>
+#include <open62541/plugin/log_stdout.h>
 
 //UDP multicast network layer specific internal data
 typedef struct {

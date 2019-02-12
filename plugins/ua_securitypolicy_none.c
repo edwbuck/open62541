@@ -5,7 +5,7 @@
  *    Copyright 2017 (c) Stefan Profanter, fortiss GmbH
  */
 
-#include "ua_securitypolicies.h"
+#include <open62541/plugin/securitypolicy_default.h>
 
 static UA_StatusCode
 verify_none(const UA_SecurityPolicy *securityPolicy,

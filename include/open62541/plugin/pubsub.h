@@ -96,7 +96,7 @@ typedef struct {
  * .. note:: This has to be done before the server is started with UA_Server_run. */
 UA_StatusCode UA_EXPORT
 UA_ServerConfig_addPubSubTransportLayer(UA_ServerConfig *config,
-        UA_PubSubTransportLayer *pubsubTransportLayer);
+                                        UA_PubSubTransportLayer *pubsubTransportLayer);
 
 #endif /* UA_ENABLE_PUBSUB */
 

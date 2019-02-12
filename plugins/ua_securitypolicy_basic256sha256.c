@@ -17,7 +17,7 @@
 #include <mbedtls/version.h>
 #include <mbedtls/sha1.h>
 
-#include "ua_securitypolicies.h"
+#include <open62541/plugin/securitypolicy_default.h>
 
 /* Notes:
  * mbedTLS' AES allows in-place encryption and decryption. Sow we don't have to

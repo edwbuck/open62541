@@ -8,8 +8,7 @@
 #ifndef UA_PLUGIN_HISTORYDATABASE_H_
 #define UA_PLUGIN_HISTORYDATABASE_H_
 
-#include "ua_types.h"
-#include "ua_server.h"
+#include <open62541/server.h>
 
 _UA_BEGIN_DECLS
 
@@ -49,16 +48,20 @@ struct UA_HistoryDatabase {
      * hdbContext is the context of the UA_HistoryDatabase.
      * sessionId and sessionContext identify the session which set this value.
      * requestHeader, historyReadDetails, timestampsToReturn, releaseContinuationPoints
-     * nodesToReadSize and nodesToRead is the requested data from the client. It is from the request object.
-     * response the response to fill for the client. If the request is ok, there is no need to use it.
-     *          Use this to set status codes other than "Good" or other data.
-     *          You find an already allocated UA_HistoryReadResult array with an UA_HistoryData object
-     *          in the extension object in the size of nodesToReadSize. If you are not willing to return data,
-     *          you have to delete the results array, set it to NULL and set the resultsSize to 0.
-     *          Do not access historyData after that.
-     * historyData is a proper typed pointer array pointing in the UA_HistoryReadResult extension object.
-     *             use this to provide result data to the client.
-     *             Index in the array is the same as in nodesToRead and the UA_HistoryReadResult array. */
+     * nodesToReadSize and nodesToRead is the requested data from the client. It
+     *                 is from the request object.
+     * response the response to fill for the client. If the request is ok, there
+     *          is no need to use it. Use this to set status codes other than
+     *          "Good" or other data. You find an already allocated
+     *          UA_HistoryReadResult array with an UA_HistoryData object in the
+     *          extension object in the size of nodesToReadSize. If you are not
+     *          willing to return data, you have to delete the results array,
+     *          set it to NULL and set the resultsSize to 0. Do not access
+     *          historyData after that.
+     * historyData is a proper typed pointer array pointing in the
+     *             UA_HistoryReadResult extension object. use this to provide
+     *             result data to the client. Index in the array is the same as
+     *             in nodesToRead and the UA_HistoryReadResult array. */
     void
     (*readRaw)(UA_Server *server,
                void *hdbContext,

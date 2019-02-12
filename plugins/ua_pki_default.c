@@ -4,7 +4,7 @@
  *    Copyright 2018 (c) Mark Giraud, Fraunhofer IOSB
  */
 
-#include "ua_pki_certificate.h"
+#include <open62541/plugin/pki_default.h>
 
 #ifdef UA_ENABLE_ENCRYPTION
 #include <mbedtls/x509.h>

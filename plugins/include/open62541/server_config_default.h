@@ -6,12 +6,10 @@
  *    Copyright 2018 (c) Mark Giraud, Fraunhofer IOSB
  */
 
-#ifndef UA_CONFIG_DEFAULT_H_
-#define UA_CONFIG_DEFAULT_H_
+#ifndef UA_SERVER_CONFIG_DEFAULT_H_
+#define UA_SERVER_CONFIG_DEFAULT_H_
 
-#include <open62541/server.h>
 #include <open62541/server_config.h>
-#include <open62541/client.h>
 
 _UA_BEGIN_DECLS
 
@@ -108,21 +106,6 @@ UA_ServerConfig_set_customHostname(UA_ServerConfig *config,
 UA_EXPORT void
 UA_ServerConfig_delete(UA_ServerConfig *config);
 
-/*************************/
-/* Default Client Config */
-/*************************/
-
-UA_StatusCode UA_EXPORT
-UA_ClientConfig_setDefault(UA_ClientConfig *config);
-
-#ifdef UA_ENABLE_ENCRYPTION
-UA_StatusCode UA_EXPORT
-UA_ClientConfig_setDefaultEncryption(UA_ClientConfig *config,
-                                     UA_ByteString localCertificate, UA_ByteString privateKey,
-                                     const UA_ByteString *trustList, size_t trustListSize,
-                                     const UA_ByteString *revocationList, size_t revocationListSize);
-#endif
-
 _UA_END_DECLS
 
-#endif /* UA_CONFIG_DEFAULT_H_ */
+#endif /* UA_SERVER_CONFIG_DEFAULT_H_ */
